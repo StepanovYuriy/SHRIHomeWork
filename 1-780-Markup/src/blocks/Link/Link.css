@@ -1,0 +1,20 @@
+.Link {
+    color: var(--color-text-primary);
+    font-size: var(--text-font-size-s);
+    line-height: 16px;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .Link {
+        line-height: 18px;
+    }
+}
+
+.Link:hover {
+    color: var(--red-600);
+}
+
+.Link_indentR_13 {
+    margin-right: 13px;
+}

@@ -1,0 +1,36 @@
+.Input {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.Input-Label.Text {
+    line-height: 18px;
+}
+
+.Input-LabelRequired {
+    color: var(--red-500);
+}
+
+.Input-Text {
+    outline: none;
+    background: var(--color-bg-base);
+    border: 2px solid var(--color-bg-heavy);
+    border-radius: var(--border-radius-s);
+    padding: var(--space-s) 11px;
+    font-size: var(--text-font-size-s);
+    line-height: 16px;
+    color: var(--color-text);
+}
+
+.Input-Text::placeholder {
+    opacity: 0.2;
+}
+
+.Input-Text_indentT_s {
+    margin-top: var(--space-s);
+}
+
+.Input-Text_align_right {
+    text-align: right;
+}

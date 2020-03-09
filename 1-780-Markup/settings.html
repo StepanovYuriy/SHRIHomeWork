@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="./build/style.css">
+</head>
+
+<body>
+    <div class="Page">
+        <div class="Header">
+            <div class="Header-Title Header-Title_color_primary">
+                School CI server
+            </div>
+        </div>
+        <div class="Content">
+            <div class="Form">
+                <div class="Form-Title">
+                    Settings
+                </div>
+                <div class="Form-Description">
+                    Configure repository connection and synchronization settings.
+                </div>
+                <div class="Form-Container">
+                    <div class="Form-Field">
+                        <div class="Input">
+                            <label class="Input-Label Text">
+                                GitHub repository
+                                <span class="Input-LabelRequired">
+                                    *
+                                </span>
+                            </label>
+                            <input class="Input-Text Input-Text_indentT_s" placeholder="user-name/repo-name" />
+                        </div>
+                    </div>
+                    <div class="Form-Field Form-Field_indentT_xxxl">
+                        <div class="Input">
+                            <label class="Input-Label Text">
+                                Build command
+                            </label>
+                            <input class="Input-Text Input-Text_indentT_s" placeholder=""
+                                value="npm ci && npm run build" />
+                        </div>
+                    </div>
+                    <div class="Form-Field Form-Field_indentT_xxxl">
+                        <div class="Input">
+                            <label class="Input-Label Text">
+                                Main branch
+                            </label>
+                            <input class="Input-Text Input-Text_indentT_s" placeholder="" value="master |" />
+                        </div>
+                    </div>
+                    <div class="Form-Field Form-Field_indentT_xxxl">
+                        <div class="Text">Synchronize every</div>
+                        <div class="Form-NumberInput">
+                            <div class="Input">
+                                <input class="Input-Text Input-Text_align_right" placeholder="" value="10" />
+                            </div>
+                        </div>
+                        <div class="Text">minutes</div>
+                    </div>
+                </div>
+                <div class="Form-Buttons">
+                    <div class="Button Button_size_m Button_type_action Button_indentR_s">
+                        <span class="Text">Save</span>
+                    </div>
+                    <div class="Button Button_size_m Button_type_control Button_indentR_s">
+                        <span class="Text">Cancel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="Footer">
+            <div class="Footer-Navigation">
+                <a class="Link Link_indentR_13" href="#">
+                    Support
+                </a>
+                <a class="Link" href="#">
+                    Learning
+                </a>
+            </div>
+            <div class="Footer-Copyright Text Text_color_primary">
+                © 2020 Stepanov Yuriy
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

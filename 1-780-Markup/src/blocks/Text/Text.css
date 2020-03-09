@@ -1,0 +1,12 @@
+.Text {
+    color: var(--color-text);
+    font-size: var(--text-font-size-s);
+}
+
+.Text_color_primary {
+    color: var(--color-text-primary);
+}
+
+.Text_align_center {
+    text-align: center;
+}

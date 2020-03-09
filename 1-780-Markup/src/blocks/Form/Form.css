@@ -1,0 +1,59 @@
+.Form {
+    display: flex;
+    flex-direction: column;
+    /* Это скорее всего должно быть не тут */
+    max-width: 475px;
+}
+
+.Form-Title {
+    font-size: var(--headline-font-m);
+    font-weight: bold;
+    margin-bottom: var(--space-s);
+    line-height: 20px;
+}
+
+.Form-Description {
+    font-size: var(--text-font-size-s);
+    line-height: 18px;
+}
+
+.Form-Container {
+    margin-top: 22px;
+}
+
+@media (max-width: 768px) {
+    .Form-Container {
+        margin-top: var(--space-m);
+    }
+}
+
+.Form-Field {
+    display: flex;
+    align-items: center;
+}
+
+.Form-Field_indentT_xxxl {
+    margin-top: var(--space-l);
+}
+
+.Form-NumberInput {
+    margin: 0 var(--space-s);
+    width: 52px;
+}
+
+.Form-Buttons {
+    display: flex;
+    margin-top: 24px;
+}
+
+@media (max-width: 768px) {
+    .Form-Buttons {
+        flex-direction: column;
+        margin-top: 18px;
+    }
+    /* Есть большие сомнения по поводу смены правого отступа на нижний, но задачу решает */
+    .Form-Buttons .Button_indentR_s {
+        margin-right: 0;
+        margin-bottom: var(--space-m);
+    }
+}

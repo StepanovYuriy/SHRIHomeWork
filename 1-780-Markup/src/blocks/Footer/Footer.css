@@ -1,0 +1,34 @@
+.Footer {
+    display: flex;
+    background: var(--blue-grey-50);
+    padding: var(--space-s) 100px;
+}
+
+@media (max-width: 768px) {
+    .Footer {
+        padding: var(--space-m) var(--space-l);
+        flex-direction: column;
+    }
+}
+
+.Footer-Navigation {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+    .Footer-Navigation {
+        margin-bottom: var(--space-s);
+    }
+}
+
+.Footer-Copyright {
+    line-height: 16px;
+}
+
+@media (max-width: 768px) {
+    .Footer-Copyright {
+        line-height: 18px;
+    }
+}

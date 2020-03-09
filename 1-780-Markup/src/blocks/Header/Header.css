@@ -1,0 +1,38 @@
+.Header {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 100px;
+    max-width: 1024px;
+    align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+    .Header {
+        padding: var(--space-m) var(--space-l);
+    }
+}
+
+.Header-Title {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 500;
+    flex-grow: 1;
+    margin-right: var(--space-s);
+}
+
+@media (max-width: 768px) {
+    .Header-Title {
+        font-size: 18px;
+        line-height: 22px;
+        /* Не получилось задать нужную высоту header на странице настроек без указания минимальной высоты */
+        min-height: 28px;
+    }
+}
+
+.Header-Title_color_primary {
+    color: var(--color-text-primary);
+}
+
+.Header-Title_color_black {
+    color: var(--black-500);
+}

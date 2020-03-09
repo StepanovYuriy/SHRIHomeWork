@@ -1,0 +1,240 @@
+.Card {
+    display: flex;
+    background: var(--color-bg-base);
+    box-shadow: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+    border-radius: var(--border-radius-m);
+    padding: var(--space-m) 24px;
+}
+
+.Card:hover {
+    box-shadow: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+}
+
+@media (max-width: 768px) {
+    .Card {
+        padding: var(--space-l) var(--space-m);
+    }
+}
+
+.Card-Status {
+    height: 22px;
+    width: 22px;
+    margin-right: var(--space-s);
+}
+
+@media (max-width: 768px) {
+    .Card-Status {
+        height: 16px;
+        width: 16px;
+    }
+    .Card-Status .Icon {
+        height: 16px;
+        width: 16px;
+    }
+}
+
+.Card-Info {
+    display: flex;
+    flex-grow: 1;
+}
+
+.Card-Info .Icon {
+    opacity: 0.3;
+}
+
+.Card-Info_mode_detail {
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .Card-Info {
+        flex-direction: column;
+    }
+}
+
+.Card-Message {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+    .Card-Message {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+.Card-Number {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 700;
+    margin-right: var(--space-s);
+    margin-bottom: var(--space-s);
+}
+
+@media (max-width: 768px) {
+    .Card-Number {
+        font-size: 16px;
+        line-height: 16px;
+    }
+}
+
+.Card-Number_status_done {
+    color: var(--green-500);
+}
+
+.Card-Number_status_fail {
+    color: var(--red-500);
+}
+
+.Card-Number_status_wait {
+    color: var(--orange-500);
+}
+
+.Card-Description {
+    font-size: var(--headline-font-m);
+    line-height: 20px;
+    margin-right: var(--space-s);
+    margin-bottom: var(--space-s);
+}
+
+@media (max-width: 767.98px) {
+    .Card-Description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100px;
+        flex-grow: 1;
+    }
+}
+
+.Card-Meta {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+    .Card-Meta {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+.Card-Commit {
+    display: flex;
+    align-items: center;
+    margin-right: var(--space-m);
+}
+
+@media (max-width: 768px) {
+    .Card-Commit {
+        margin-bottom: var(--space-s);
+    }
+}
+
+.Card-Commit .Text {
+    margin-left: var(--space-xs);
+    line-height: 16px;
+}
+
+.Card-Hash {
+    opacity: 0.65;
+}
+
+.Card-Author {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .Card-Author {
+        margin-bottom: var(--space-s);
+    }
+}
+
+.Card-Author .Text {
+    margin-left: var(--space-s);
+    line-height: 16px;
+}
+
+.Card-FirstContainer {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+@media (max-width: 767.98px) {
+    .Card-Info_mode_detail .Card-FirstContainer {
+        margin-bottom: var(--space-s);
+    }
+}
+
+.Card-SecondContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+    .Card-SecondContainer {
+        border-top: 1px solid var(--blue-grey-50);
+        padding-top: var(--space-s);
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}
+
+.Card-Info_mode_detail .Card-SecondContainer {
+    border-top: 1px solid var(--blue-grey-50);
+    padding-top: var(--space-s);
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.Card-Time {
+    display: flex;
+}
+
+.Card-Date {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .Card-Date {
+        margin-right: var(--space-s);
+    }
+}
+
+.Card-Info_mode_detail .Card-Date {
+    margin-right: var(--space-s);
+}
+
+.Card-Time .Text {
+    margin-left: var(--space-xs);
+}
+
+@media (max-width: 768px) {
+    .Card-Time .Text {
+        margin-left: var(--space-s);
+    }
+}
+
+.Card-Info_mode_detail .Card-Time .Text {
+    margin-left: var(--space-s);
+}
+
+.Card-Date .Text {
+    margin-left: var(--space-xs);
+}
+
+@media (max-width: 768px) {
+    .Card-Date .Text {
+        margin-left: var(--space-s);
+    }
+}
+
+.Card-Info_mode_detail .Card-Date .Text {
+    margin-left: var(--space-s);
+}

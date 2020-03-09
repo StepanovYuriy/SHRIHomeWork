@@ -1,0 +1,74 @@
+.Button {
+    border-radius: var(--border-radius-s);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.Button_type_control {
+    background: var(--color-bg-control);
+}
+
+.Button_type_control:hover {
+    background: var(--color-bg-control-hovered);
+}
+
+.Button_type_action {
+    background: var(--color-bg-action);
+}
+
+.Button_type_action:hover {
+    background: var(--color-bg-action-hovered);
+}
+
+.Button_size_s {
+    padding: var(--space-s) 13px;
+    line-height: 12px;
+}
+
+@media (max-width: 768px) {
+    .Button_size_s {
+        padding: 10px 20px;
+        line-height: 16px;
+    }
+}
+
+.Button_size_m {
+    padding: 10px 20px;
+    line-height: 16px;
+}
+
+.Button_indentR_s {
+    margin-right: var(--space-s);
+}
+
+.Button-IconContainer {
+    width: 12px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Button_mode_iconAndText .Button-IconContainer {
+    /* Похоже на костыль, но вариант лучше не придумал */
+    margin-left: -5px;
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .Button_mode_iconAndText {
+        padding: 0;
+    }
+    .Button_mode_iconAndText .Button-IconContainer {
+        margin: var(--space-s);
+    }
+    .Button_mode_iconAndText .Text {
+        display: none;
+    }
+}
+
+.Button_mode_onlyIcon .Button-IconContainer {
+    margin: var(--space-s);
+}

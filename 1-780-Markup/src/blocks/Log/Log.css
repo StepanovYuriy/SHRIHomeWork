@@ -1,0 +1,12 @@
+.Log {
+    margin-top: var(--space-m);
+    margin-bottom: var(--space-m);
+    font-family: 'Hack';
+    /* Есть константа --color-bg-disabled но по смыслу она сюда не подходит */
+    background: #F2F2F2;
+    border-radius: var(--border-radius-m);
+    padding: var(--space-s) 12px;
+    font-size: var(--text-font-size-code);
+    line-height: 20px;
+    overflow-x: auto;
+}

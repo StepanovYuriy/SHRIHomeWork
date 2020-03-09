@@ -1,0 +1,24 @@
+.List {
+    display: flex;
+    flex-direction: column;
+}
+
+.List-Item {
+    margin-bottom: var(--space-s);
+}
+
+.List-Item:last-of-type {
+    margin-bottom: 0;
+}
+
+.List-Button {
+    display: flex;
+    margin-top: var(--space-s);
+    margin-bottom: var(--space-s);
+}
+
+@media (max-width: 768px) {
+    .List-Button {
+        flex-direction: column;
+    }
+}
