@@ -1,0 +1,71 @@
+Вариант 2. Найти среднее арифметическое
+
+<script src="./shri-async-hw/shri-async-hw.js"></script>
+
+<script>
+    const simpleArray = [1, 3, 5];
+    // Небольшие тесты
+    // const simpleArray = [];
+    // const simpleArray = [0];
+    // const simpleArray = [-1, 1];
+    // const simpleArray = '1,'.repeat(99).split(',').map(x => +x);
+    console.log('Исходный массив:', simpleArray);
+
+    const simpleResult = simpleArray.length > 0
+        ? simpleArray.reduce((accumulator, current) => accumulator + current) / simpleArray.length
+        : 0;
+    console.log('Должно получиться такое среднее арифметическое:', simpleResult);
+
+    const asyncArray = new Homework.AsyncArray(simpleArray);
+
+    function getArithmeticalMean(array, cb) {
+        const promisify = (fn) => {
+            return (...args) => {
+                return new Promise((resolve) => {
+                    const customCallback = (result) => resolve(result);
+
+                    args.push(customCallback);
+                    fn.call(this, ...args);
+                });
+            };
+        };
+
+        const getArithmeticalMeanAsync = async (array) => {
+            const getLength = promisify(array.length),
+                getValue = promisify(array.get),
+                equal = promisify(Homework.equal),
+                less = promisify(Homework.less),
+                add = promisify(Homework.add),
+                divide = promisify(Homework.divide);
+
+            const length = await getLength();
+
+            if (await equal(length, 0)) {
+                return 0;
+            }
+
+            let accumulator = 0;
+            let index = 0;
+
+            while (await less(index, length)) {
+                const currentValue = await getValue(index);
+                accumulator = await add(accumulator, currentValue);
+                index = await add(index, 1);
+            }
+
+            return await divide(accumulator, length);
+        };
+
+        getArithmeticalMeanAsync(array)
+            .then((result) => cb(result))
+            .catch((error) => console.error(error));
+    }
+
+    const timeStart = window.performance.now();
+
+    getArithmeticalMean(asyncArray, (result) => {
+        console.log('Среднее арифметическое:', result);
+        console.log('Время выполнения расчётов (ms):', window.performance.now() - timeStart);
+    });
+
+</script>
