@@ -6,6 +6,8 @@
 
 [__Часть 1.__](./websiteAnalisys/WebsiteAnalysis.md) Анализ загрузки сайта lifehacker.ru
 
+[__Часть 2.__](./eslintRule/ESLintRule.md) Написание правила для ESLint
+
 ___
 
 Общий файл [README.md](../README.md) для всех домашних работ.

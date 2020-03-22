@@ -1,0 +1,19 @@
+{
+  "name": "4-786-devtools",
+  "version": "1.0.0",
+  "description": "lodash-to-native map",
+  "main": "index.js",
+  "scripts": {
+    "lint": "npx eslint index.js",
+    "lint-fix-dry-run": "npx eslint index.js --fix-dry-run"
+  },
+  "author": "StepanovYuriy",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-lodash-to-native": "git+https://github.com/StepanovYuriy/eslint-plugin-lodash-to-native.git"
+  }
+}
