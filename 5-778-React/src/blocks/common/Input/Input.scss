@@ -1,0 +1,37 @@
+.Input {
+  display: flex;
+  flex-direction: column;
+
+  &-Label {
+    color: var(--color-text-default);
+    font-size: var(--text-font-size-default);
+    line-height: 18px;
+    margin-bottom: var(--space-s);
+  }
+
+  &-LabelRequired {
+    color: var(--color-label-require);
+  }
+
+  &-Box {
+    background: var(--color-bg-base);
+    border: 2px solid var(--color-input-border);
+    border-radius: var(--border-radius-s);
+    padding: var(--space-s) 11px;
+    font-size: var(--text-font-size-default);
+    line-height: 16px;
+    color: var(--color-text-default);
+
+    &::placeholder {
+      opacity: 0.2;
+    }
+
+    &:focus {
+      outline-color: var(--color-input-focused);
+    }
+
+    &_text_right {
+      text-align: right;
+    }
+  }
+}

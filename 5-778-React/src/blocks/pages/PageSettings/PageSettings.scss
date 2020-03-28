@@ -1,0 +1,48 @@
+.PageSettings {
+  &-Form {
+    display: flex;
+    flex-direction: column;
+    max-width: 675px;
+  }
+
+  &-Title {
+    font-size: var(--headline-font-m);
+    font-weight: bold;
+    margin-bottom: var(--space-s);
+    line-height: 20px;
+  }
+
+  &-Description {
+    font-size: var(--text-font-size-default);
+    line-height: 18px;
+    margin-bottom: 22px;
+  }
+
+  &-Field {
+    display: flex;
+    align-items: center;
+
+    &_space_top {
+      margin-top: var(--space-l);
+    }
+  }
+
+  &-Label {
+    font-size: var(--text-font-size-default);
+  }
+
+  &-NumberInput {
+    margin-left: var(--space-s);
+    margin-right: var(--space-s);
+    width: 52px;
+  }
+
+  &-Buttons {
+    display: flex;
+    margin-top: 24px;
+  }
+
+  &-Button_space_right {
+    margin-right: var(--space-s);
+  }
+}

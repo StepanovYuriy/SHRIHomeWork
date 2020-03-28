@@ -1,0 +1,88 @@
+.Button {
+  border-radius: var(--border-radius-s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &-Icon {
+    width: 12px;
+    height: 12px;
+    fill: var(--gray-700);
+
+    & .Button_disabled {
+      fill-opacity: 0.5;
+    }
+  }
+
+  &-Text {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-family: 'YS Text', 'Helvetica Neue', Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+
+    & .Button_disabled {
+      opacity: 0.5;
+    }
+  }
+
+  &_size {
+    &_s {
+      padding: var(--space-s);
+      line-height: 12px;
+    }
+
+    &_m {
+      padding: 10px 15px;
+      line-height: 16px;
+    }
+  }
+
+  &_type {
+    &_default {
+      & {
+        background-color: var(--color-button-default);
+      }
+
+      &:hover {
+        background-color: var(--color-button-default-hovered);
+      }
+
+      &:focus {
+        outline-color: var(--color-button-default-focused);
+      }
+    }
+
+    &_action {
+      & {
+        background-color: var(--color-button-action);
+      }
+
+      &:hover {
+        background-color: var(--color-button-action-hovered);
+      }
+
+      &:focus {
+        outline-color: var(--color-button-action-focused);
+      }
+    }
+  }
+
+  &_disabled {
+    background-color: var(--color-button-disabled);
+
+    & .Button-Icon {
+      opacity: 0.5;
+    }
+
+    & .Button-Text {
+      opacity: 0.5;
+      color: var(--color-button-disabled-text);
+    }
+  }
+}
