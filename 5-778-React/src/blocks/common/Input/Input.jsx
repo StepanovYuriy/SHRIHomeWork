@@ -6,6 +6,7 @@ import cn from 'classnames';
 const Input = (props) => {
     const {
         value,
+        onChange,
         label,
         placeholder,
         required,
@@ -25,6 +26,7 @@ const Input = (props) => {
             {label !== '' ? renderLabel() : null}
             <input className={cn('Input-Box', { 'Input-Box_text_right': Boolean(textRight) })}
                    value={value}
+                   onChange={onChange}
                    placeholder={placeholder}
             />
         </div>
@@ -32,7 +34,8 @@ const Input = (props) => {
 };
 
 Input.propTypes = {
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    onChange: PropTypes.func.isRequired,
     label: PropTypes.string,
     placeholder: PropTypes.string,
     required: PropTypes.bool,

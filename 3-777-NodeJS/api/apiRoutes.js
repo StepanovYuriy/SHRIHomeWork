@@ -96,12 +96,13 @@ router.route('/settings')
             }
 
             await axiosDBInstance.post('/conf', { ...req.body });
+            const { data } = await axiosDBInstance.get('/conf');
 
             // Создание локальной копии запускается после успешного сохранения настроек в БД.
             // Можно начать создание до сохранения, но есть сомнения, что надо ли так делать
             setTimeout(() => runGitClone(repoName), 0);
 
-            return res.json({});
+            return res.json(data);
         } catch (error) {
             const { code, message } = getCodeAndMessage(error);
             return res.status(code).json({ code, message });

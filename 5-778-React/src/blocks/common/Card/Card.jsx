@@ -22,6 +22,7 @@ const Card = (props) => {
         author,
         date,
         duration,
+        onClick,
         mixedClassNames,
     } = props;
 
@@ -89,7 +90,12 @@ const Card = (props) => {
     );
 
     return (
-        <div className={cn('Card', mixedClassNames)}>
+        // TODO Разобраться, когда будет время
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus
+        <div className={cn('Card', mixedClassNames)}
+             role="button"
+             onClick={onClick}
+        >
             {renderStatus()}
             <div className="Card-Info">
                 {renderMainContainer()}
@@ -108,11 +114,13 @@ Card.propTypes = {
     author: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     duration: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
     mixedClassNames: PropTypes.string,
 };
 
 Card.defaultProps = {
     description: '',
+    onClick: () => null,
     mixedClassNames: null,
 };
 

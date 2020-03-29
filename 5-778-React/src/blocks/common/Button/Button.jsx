@@ -11,7 +11,15 @@ const TYPES = ['default', 'action'];
 const ICONS = ['settings', 'run', 'rebuild'];
 
 const Button = (props) => {
-    const { size, type, icon, text, disabled, mixedClassNames } = props;
+    const {
+        size,
+        type,
+        icon,
+        text,
+        onClick,
+        disabled,
+        mixedClassNames,
+    } = props;
 
     const renderIcon = () => {
         switch (icon) {
@@ -45,6 +53,7 @@ const Button = (props) => {
                     },
                     mixedClassNames,
                 )}
+                onClick={onClick}
                 disabled={disabled ? true : null}
         >
             {icon ? renderIcon() : null}
@@ -58,6 +67,7 @@ Button.propTypes = {
     type: PropTypes.oneOf(TYPES).isRequired,
     icon: PropTypes.oneOf(ICONS),
     text: PropTypes.string,
+    onClick: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     mixedClassNames: PropTypes.string,
 };

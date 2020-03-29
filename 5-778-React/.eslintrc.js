@@ -42,6 +42,27 @@ module.exports = {
         'linebreak-style': 'off',
 
         /**
+         * Максимальная длина строки (120 символов)
+         * https://eslint.org/docs/rules/max-len
+         */
+        'max-len': ['error', {
+            code: 120,
+            ignoreUrls: true,
+            ignoreComments: false,
+            ignoreRegExpLiterals: true,
+            ignoreStrings: true,
+            ignoreTemplateLiterals: true,
+        }],
+
+        /**
+         * Запрещено использование console.log()
+         * https://eslint.org/docs/rules/no-console
+         */
+        'no-console': ['error', {
+            allow: ['info', 'warn', 'error'],
+        }],
+
+        /**
          * Настройки для согласованных разрывов строк
          * https://eslint.org/docs/rules/object-curly-newline
          */

@@ -1,34 +1,69 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import './PageBuildDetails.scss';
+import { useHistory, useParams } from 'react-router-dom';
+import { shallowEqual, useSelector } from 'react-redux';
 import Page from '../../common/Page/Page';
 import Header from '../../common/Header/Header';
 import Button from '../../common/Button/Button';
 import Footer from '../../common/Footer/Footer';
 import Card from '../../common/Card/Card';
 
-const PageBuildDetails = () => (
-    <Page>
-        <Header title="philip1967/my-awesome-repo" titleType="build">
-            <Button size="s"
-                    type="default"
-                    icon="run"
-                    text="Run build"
-                    mixedClassNames="PageBuildHistory-Button_space_right"
-            />
-            <Button size="s" type="default" icon="settings" />
-        </Header>
-        <div className="Page-Content">
+const PageBuildDetails = () => {
+    const { buildId } = useParams();
+    const history = useHistory();
+
+    const { settings, buildList } = useSelector((state) => state, shallowEqual);
+
+    const build = useMemo(
+        () => buildList.find(({ id }) => id === buildId),
+        [buildList, buildId],
+    );
+
+    const onClickButtonSettings = () => {
+        history.push('/settings');
+    };
+
+    const onClickButtonRebuild = () => {
+        console.warn('Пока не реализовано');
+    };
+
+    const renderCard = () => {
+        if (!build) return 'Нет данных';
+        const { buildNumber, commitMessage, commitHash, branchName, authorName } = build;
+
+        return (
             <Card status="done"
-                  number={1368}
-                  description="add documentation for postgres scaler"
-                  branch="master"
-                  commitHash="9c9f0b9"
-                  author="Philip Kirkorov"
+                  number={buildNumber}
+                  description={commitMessage}
+                  branch={branchName}
+                  commitHash={commitHash}
+                  author={authorName}
                   date="21 янв, 03:06"
                   duration="1 ч 20 мин"
             />
-            <pre className="PageBuildDetails-Log">
-                {`Starting type checking and linting service...
+        );
+    };
+
+    return (
+        <Page>
+            <Header title={settings.repoName} titleType="build">
+                <Button size="s"
+                        type="default"
+                        icon="rebuild"
+                        text="Rebuild"
+                        onClick={onClickButtonRebuild}
+                        mixedClassNames="PageBuildHistory-Button_space_right"
+                />
+                <Button size="s"
+                        type="default"
+                        icon="settings"
+                        onClick={onClickButtonSettings}
+                />
+            </Header>
+            <div className="Page-Content">
+                {renderCard()}
+                <pre className="PageBuildDetails-Log">
+                    {`Starting type checking and linting service...
 Using 1 worker with 2048MB memory limit
 Hash: d54ed20309f352b3bda76cbbb6d272ed6afde438bd7a265eb08db3624c32dfc883a8c379c67f4de6
 Version: webpack 4.41.6
@@ -84,10 +119,11 @@ Child
     [./src/account/server.tsx] 1.62 KiB {main} [built]
     [./src/account/store.ts] 1.05 KiB {main} [built]
         + 1484 hidden modules`}
-            </pre>
-        </div>
-        <Footer />
-    </Page>
-);
+                </pre>
+            </div>
+            <Footer />
+        </Page>
+    );
+};
 
 export default PageBuildDetails;
