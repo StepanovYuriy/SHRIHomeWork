@@ -1,12 +1,12 @@
 .Card {
   display: flex;
   background: var(--color-bg-base);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-card);
   border-radius: var(--border-radius-m);
   padding: var(--space-m) 24px;
 
   &:hover {
-    box-shadow: var(--shadow-hovered);
+    box-shadow: var(--shadow-card-hovered);
     cursor: pointer;
   }
 
@@ -51,7 +51,7 @@
   }
 
   &-Number {
-    font-size: var(--build-font-size);
+    font-size: var(--headline-font-l);
     line-height: 20px;
     font-weight: 700;
     margin-right: var(--space-s);

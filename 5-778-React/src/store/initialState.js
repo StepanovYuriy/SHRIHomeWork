@@ -44,6 +44,9 @@ const initialState = {
     fetching: false,
     settings: getSettingsFromBrowserStorage(),
     buildList: [],
+    buildLogs: {},
+    buildsNotFound: false,
+    countLoadedBuilds: 0,
 };
 
 export default initialState;

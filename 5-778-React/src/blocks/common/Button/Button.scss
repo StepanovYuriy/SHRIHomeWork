@@ -5,7 +5,7 @@
   justify-content: center;
   border: none;
 
-  &:hover {
+  &:hover:not(.Button_disabled) {
     cursor: pointer;
   }
 

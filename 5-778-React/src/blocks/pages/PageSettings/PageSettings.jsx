@@ -28,15 +28,13 @@ const PageSettings = () => {
         };
 
         dispatch(saveSettingsRequest(newSettings));
-
-        history.push('/');
     };
 
     const onClickButtonCancel = () => {
         history.push('/');
     };
 
-    const onChangerepoName = (event) => setRepoName(event.target.value);
+    const onChangeRepoName = (event) => setRepoName(event.target.value);
 
     const onChangeBuildCommand = (event) => setBuildCommand(event.target.value);
 
@@ -59,7 +57,7 @@ const PageSettings = () => {
                     Configure repository connection and synchronization settings.
                 </div>
                 <Input value={repoName}
-                       onChange={onChangerepoName}
+                       onChange={onChangeRepoName}
                        label="GitHub repository"
                        placeholder="user-name/repo-name"
                        required
