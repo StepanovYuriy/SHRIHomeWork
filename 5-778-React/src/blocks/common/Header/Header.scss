@@ -1,0 +1,23 @@
+.Header {
+  display: flex;
+  flex-direction: row;
+  padding: 10px var(--space-xxxl);
+  max-width: 1024px;
+  align-items: flex-start;
+
+  &-Title {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 500;
+    flex-grow: 1;
+    margin-right: var(--space-s);
+
+    &_type_settings {
+      color: var(--color-text-primary);
+    }
+
+    &_type_build {
+      color: var(--color-text-default);
+    }
+  }
+}

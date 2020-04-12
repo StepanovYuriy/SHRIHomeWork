@@ -1,0 +1,28 @@
+.PopupRunNewBuild {
+  &-Header {
+    color: var(--color-text-default);
+    font-size: var(--headline-font-l);
+    line-height: 22px;
+    margin-bottom: var(--space-m);
+  }
+
+  &-Content {
+    min-width: 450px;
+    margin-bottom: var(--space-m);
+  }
+
+  &-Description {
+    color: var(--color-text-default);
+    font-size: var(--text-font-size-default);
+    line-height: 18px;
+    margin-bottom: var(--space-m);
+  }
+
+  &-Footer {
+    display: flex;
+  }
+
+  &-Button_space_right {
+    margin-right: var(--space-s);
+  }
+}

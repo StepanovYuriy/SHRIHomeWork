@@ -1,0 +1,128 @@
+.Card {
+  display: flex;
+  background: var(--color-bg-base);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--border-radius-m);
+  padding: var(--space-m) 24px;
+
+  &:hover {
+    box-shadow: var(--shadow-card-hovered);
+    cursor: pointer;
+  }
+
+  &-Status {
+    height: 22px;
+    width: 22px;
+    margin-right: var(--space-s);
+
+    &_done {
+      fill: var(--color-build-status-done);
+    }
+
+    &_wait {
+      fill: var(--color-build-status-wait);
+    }
+
+    &_fail {
+      fill: var(--color-build-status-fail);
+    }
+  }
+
+  &-Info {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  &-Icon {
+    fill-opacity: 0.3;
+    margin-right: var(--space-xs);
+  }
+
+  &-MainContainer {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+  }
+
+  &-Message {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  &-Number {
+    font-size: var(--headline-font-l);
+    line-height: 20px;
+    font-weight: 700;
+    margin-right: var(--space-s);
+    margin-bottom: var(--space-s);
+
+    &_status {
+      &_done {
+        color: var(--color-build-status-done);
+      }
+
+      &_wait {
+        color: var(--color-build-status-wait);
+      }
+
+      &_fail {
+        color: var(--color-build-status-fail);
+      }
+    }
+  }
+
+  &-Description {
+    font-size: var(--headline-font-m);
+    line-height: 20px;
+    margin-right: var(--space-s);
+    margin-bottom: var(--space-s);
+  }
+
+  &-Meta {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  &-Commit {
+    display: flex;
+    align-items: center;
+    margin-right: var(--space-m);
+  }
+
+  &-Author {
+    display: flex;
+    align-items: center;
+  }
+
+  &-RightContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &-Date {
+    display: flex;
+  }
+
+  &-Duration {
+    display: flex;
+  }
+
+  &-Branch,
+  &-AuthorName,
+  &-DateText,
+  &-DurationText {
+    color: var(--color-text-default);
+    font-size: var(--text-font-size-default);
+    line-height: 16px;
+  }
+
+  &-CommitHash {
+    color: var(--color-text-primary);
+    font-size: var(--text-font-size-default);
+    line-height: 16px;
+    margin-left: var(--space-xs);
+  }
+}

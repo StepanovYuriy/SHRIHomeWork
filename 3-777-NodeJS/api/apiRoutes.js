@@ -95,13 +95,17 @@ router.route('/settings')
                 return res.status(code).json({ code, message });
             }
 
+            try {
+                await runGitClone(repoName);
+            } catch (error) {
+                const code = 400;
+                const message = 'Не удалось создать локальную копию репозитория';
+                return res.status(code).json({ code, message });
+            }
             await axiosDBInstance.post('/conf', { ...req.body });
-
-            // Создание локальной копии запускается после успешного сохранения настроек в БД.
-            // Можно начать создание до сохранения, но есть сомнения, что надо ли так делать
-            setTimeout(() => runGitClone(repoName), 0);
-
-            return res.json({});
+            const { data } = await axiosDBInstance.get('/conf');
+console.log(data);
+            return res.json(data);
         } catch (error) {
             const { code, message } = getCodeAndMessage(error);
             return res.status(code).json({ code, message });
@@ -123,12 +127,21 @@ router.route('/builds')
         }
     })
     .post(async (req, res) => {
-        try {
-            const { commitHash } = req.body;
-            const commit = getCommitByHash(commitHash);
+        const { commitHash } = req.body;
+        let commit = null;
 
-            await axiosDBInstance.post('/build/request', commit);
-            return res.json({});
+        try {
+            const { data } = await axiosDBInstance.get('/conf');
+            commit = await getCommitByHash(commitHash, data.data);
+        } catch (error) {
+            const code = 400;
+            const message = `Не удалось получить данные для commitHash: ${commitHash}`;
+            return res.status(code).json({ code, message });
+        }
+
+        try {
+            const { data } = await axiosDBInstance.post('/build/request', commit);
+            return res.json(data);
         } catch (error) {
             const { code, message } = getCodeAndMessage(error);
             return res.status(code).json({ code, message });
