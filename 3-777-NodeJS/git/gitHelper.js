@@ -8,18 +8,18 @@ const getPathToStore = (repoName) => {
     const folderNameForRepo = repoName.replace(/\W/g, '_');
 
     return path.resolve(__dirname, './storage', folderNameForRepo);
-}
+};
 
 const runGitClone = (repoName) => {
-    console.log('Запущена проверка названия репозитория', repoName);
+    console.info('Запущена проверка названия репозитория', repoName);
 
     return new Promise((resolve, reject) => {
         const pathToStore = getPathToStore(repoName);
         if (!pathToStore) reject();
 
         if (!fs.existsSync(pathToStore)) {
-            console.log('Запущен процесс для выполнения git clone');
-            let gitProcess = spawn('git', ['clone', GITHUB_URL + repoName, pathToStore]);
+            console.info('Запущен процесс для выполнения git clone');
+            const gitProcess = spawn('git', ['clone', GITHUB_URL + repoName, pathToStore]);
 
             const timeToFail = setTimeout(() => {
                 gitProcess.kill();
@@ -27,7 +27,7 @@ const runGitClone = (repoName) => {
             }, 10 * 1000);
 
             gitProcess.on('close', (code) => {
-                console.log('gitProcess exited with code', code);
+                console.info('gitProcess exited with code', code);
                 clearTimeout(timeToFail);
 
                 if (code === 0) {
@@ -37,7 +37,7 @@ const runGitClone = (repoName) => {
                 reject(`gitProcess exited with code ${code}`);
             });
         } else {
-            console.log('Создание локальной копии не требуется. Она уже есть');
+            console.info('Создание локальной копии не требуется. Она уже есть');
             resolve('success');
         }
     });
@@ -55,17 +55,18 @@ const getCommitByHash = (commitHash, settings) => {
 
         let logData = '';
 
-        console.log('Запущен процесс для получения логов билда');
-        let gitProcess = spawn('git', command, { cwd: pathToStore });
+        console.info('Запущен процесс для получения логов билда');
+        const gitProcess = spawn('git', command, { cwd: pathToStore });
 
         gitProcess.stdout.on('data', (data) => {
             logData += data.toString();
         });
 
         gitProcess.on('close', (code) => {
-            console.log('gitProcess exited with code', code);
+            console.info('gitProcess exited with code', code);
             if (code === 0) {
                 try {
+                    // eslint-disable-next-line no-shadow
                     const { commitMessage, commitHash, authorName } = JSON.parse(logData);
                     const branchName = settings.mainBranch;
 

@@ -1,9 +1,9 @@
 const { Router } = require('express');
+const axios = require('axios').default;
+const { Agent } = require('https');
 const swaggerUi = require('swagger-ui-express');
 const swaggerConfig = require('./swagger/swagger.json');
 const { apiToken } = require('../config');
-const axios = require('axios').default;
-const { Agent } = require('https');
 const { getCommitByHash, runGitClone } = require('../git/gitHelper');
 
 const router = Router();
@@ -24,7 +24,7 @@ const requireAuthenticationToDB = (req, res, next) => {
 
     if (!authorization && apiToken) {
         // Установка специального токена из файла конфигурации
-        authorization = 'Bearer ' + apiToken;
+        authorization = `Bearer ${apiToken}`;
     }
 
     if (authorization) {
@@ -47,6 +47,7 @@ const requireAuthenticationToDB = (req, res, next) => {
 };
 
 const getCodeAndMessage = (error) => {
+    // eslint-disable-next-line prefer-const
     let { code, message, stack } = error.toJSON();
     console.error(stack);
 
@@ -56,7 +57,7 @@ const getCodeAndMessage = (error) => {
         code = 500;
         message = 'Internal Server Error';
     } else if (code) {
-        message = 'Request failed with status code ' + code;
+        message = `Request failed with status code ${code}`;
     } else if (message) {
         code = parseInt(message.replace('Request failed with status code ', ''));
         if (!code) {
@@ -69,7 +70,7 @@ const getCodeAndMessage = (error) => {
 
 // Простенькое логирование всех запросов к API
 router.use((req, res, next) => {
-    console.log('Request API:', new Date().toLocaleTimeString(), req.method, req.originalUrl);
+    console.info('Request API:', new Date().toLocaleTimeString(), req.method, req.originalUrl);
     next();
 });
 
@@ -89,7 +90,7 @@ router.route('/settings')
         try {
             const { repoName, buildCommand, mainBranch, period } = req.body;
 
-            if (!repoName || !buildCommand || !mainBranch || isNaN(period)) {
+            if (!repoName || !buildCommand || !mainBranch || Number.isNaN(period)) {
                 const code = 400;
                 const message = 'Заполнены не все поля';
                 return res.status(code).json({ code, message });
@@ -104,7 +105,6 @@ router.route('/settings')
             }
             await axiosDBInstance.post('/conf', { ...req.body });
             const { data } = await axiosDBInstance.get('/conf');
-console.log(data);
             return res.json(data);
         } catch (error) {
             const { code, message } = getCodeAndMessage(error);

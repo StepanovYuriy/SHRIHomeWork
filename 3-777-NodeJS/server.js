@@ -31,4 +31,4 @@ app.use((err, req, res) => {
 });
 
 // Старт сервера
-app.listen(3001, () => console.log(`Server started at http://localhost:3001`));
+app.listen(3001, () => console.info('Server started at http://localhost:3001'));

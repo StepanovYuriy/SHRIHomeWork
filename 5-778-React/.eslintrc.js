@@ -20,7 +20,7 @@ module.exports = {
     ],
     rules: {
         /**
-         * Настройки оступов (4 пробела)
+         * Настройки отступов (4 пробела)
          * https://eslint.org/docs/rules/indent
          */
         'indent': ['error', 4, {
