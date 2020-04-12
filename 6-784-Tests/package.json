@@ -1,0 +1,15 @@
+{
+  "name": "6-784-tests",
+  "version": "1.0.0",
+  "description": "Тесты",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "jest": "jest --watchAll --verbose"
+  },
+  "author": "StepanovYuriy",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^25.3.0"
+  }
+}
