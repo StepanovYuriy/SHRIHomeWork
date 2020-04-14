@@ -4,8 +4,8 @@
   "description": "Тесты",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "jest": "jest --watchAll --verbose"
+    "unit-test": "jest",
+    "unit-test-watch": "jest --watchAll --verbose"
   },
   "author": "StepanovYuriy",
   "license": "ISC",
