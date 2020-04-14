@@ -374,7 +374,7 @@
           }
         },
         "example": {
-          "repoName": "https://github.com/StepanovYuriy/test.git",
+          "repoName": "StepanovYuriy/test",
           "buildCommand": "run build",
           "mainBranch": "master",
           "period": 0
