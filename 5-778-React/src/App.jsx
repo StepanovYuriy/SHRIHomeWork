@@ -9,18 +9,10 @@ import PageBuildDetails from './blocks/pages/PageBuildDetails/PageBuildDetails';
 const App = () => (
     <BrowserRouter>
         <Switch>
-            <Route path="/build-history">
-                <PageBuildHistory />
-            </Route>
-            <Route path="/build/:buildId">
-                <PageBuildDetails />
-            </Route>
-            <Route path="/settings">
-                <PageSettings />
-            </Route>
-            <Route path="/">
-                <PageMain />
-            </Route>
+            <Route path="/build-history" component={PageBuildHistory} />
+            <Route path="/build/:buildId" component={PageBuildDetails} />
+            <Route path="/settings" component={PageSettings} />
+            <Route path="/" component={PageMain} />
         </Switch>
     </BrowserRouter>
 );
