@@ -74,7 +74,11 @@ const Card = (props) => {
     const renderNumberAndDescription = () => (
         <div className="Card-Message">
             <div className={cn('Card-Number',
-                { [`Card-Number_status_${status}`]: STATUSES.includes(status) })}
+                {
+                    'Card-Number_status_done': status === 'Success',
+                    'Card-Number_status_wait': ['Waiting', 'InProgress'].includes(status),
+                    'Card-Number_status_fail': ['Fail', 'Canceled'].includes(status),
+                })}
             >
                 {`#${number}`}
             </div>
