@@ -89,7 +89,7 @@ const Card = (props) => {
             <div className="Card-Commit">
                 <IconCommit className="Card-Icon" />
                 <span className="Card-Branch">{branch}</span>
-                <span className="Card-CommitHash">{commitHash}</span>
+                <span className="Card-CommitHash">{commitHash.slice(0, 7)}</span>
             </div>
             <div className="Card-Author">
                 <IconAuthor className="Card-Icon" />
