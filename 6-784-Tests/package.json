@@ -5,11 +5,19 @@
   "main": "index.js",
   "scripts": {
     "unit-test": "jest",
-    "unit-test-watch": "jest --watchAll --verbose"
+    "unit-test-watch": "jest --watchAll --verbose",
+    "integration-test": "hermione",
+    "integration-test-save-screenshots": "hermione gui",
+    "integration-test-selenium-install": "selenium-standalone install",
+    "integration-test-selenium-start": "selenium-standalone start"
   },
   "author": "StepanovYuriy",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^25.3.0"
+    "chai": "^4.2.0",
+    "hermione": "^3.1.0",
+    "html-reporter": "^5.15.2",
+    "jest": "^25.3.0",
+    "selenium-standalone": "^6.17.0"
   }
 }
