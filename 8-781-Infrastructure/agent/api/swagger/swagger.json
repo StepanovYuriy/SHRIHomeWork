@@ -1,0 +1,69 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "build-agent",
+    "description": "API для работы build-agent",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "/api"
+    }
+  ],
+  "paths": {
+    "/build": {
+      "post": {
+        "summary": "Запустить сборку",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuildModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BuildModel": {
+        "required": [
+          "buildId",
+          "commitHash",
+          "repoName",
+          "buildCommand"
+        ],
+        "type": "object",
+        "properties": {
+          "buildId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "commitHash": {
+            "type": "string"
+          },
+          "repoName": {
+            "type": "string"
+          },
+          "buildCommand": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "buildId": "d93894da-537a-4d50-ac35-e38bdd5f6db1",
+          "commitHash": "5033826ac35213ff63dcbebfc37939bcfbc0db27",
+          "repoName": "StepanovYuriy/test",
+          "buildCommand": "npm ci && run build"
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
