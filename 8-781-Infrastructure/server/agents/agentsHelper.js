@@ -106,12 +106,16 @@ const updateAgentStatus = async (agent, newStatus) => {
             };
 
             successfully = await saveAgentsToFile(agents);
+        } else {
+            console.info('Не найден агент в списке зарегистрированных');
+            console.info('Список агентов:', agents);
+            console.info('Идентификатор агента:', agentKey);
         }
 
         if (successfully) {
-            console.info('Обновлённый агент успешно сохранён');
+            console.info('Статус агента успешно обновлён');
         } else {
-            console.info('Обновлённый агент не сохранён');
+            console.info('Не удалось сохранить новый статус агента');
         }
     } catch (error) {
         console.error('Не удалось сохранить новый статус агента', error);

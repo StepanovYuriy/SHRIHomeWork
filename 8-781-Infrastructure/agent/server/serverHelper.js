@@ -12,12 +12,15 @@ const createBuildServerInstance = () => axios.create({
     httpsAgent: new Agent({
         rejectUnauthorized: false,
     }),
+    headers: {
+        agent: `localhost:${port}`,
+    },
 });
 
 /**
  * Регистрация агента в билд-сервере
  * @param {Object} buildServerInstance
- * @return {Object}
+ * @return {boolean}
  */
 const registerAgent = async (buildServerInstance) => {
     let successfully = false;
@@ -32,7 +35,27 @@ const registerAgent = async (buildServerInstance) => {
     return successfully;
 };
 
+/**
+ * Сохранение результатов сборки в билд-сервере
+ * @param {Object} buildServerInstance
+ * @param {Object} buildResult
+ * @return {boolean}
+ */
+const saveBuildResult = async (buildServerInstance, buildResult) => {
+    let successfully = false;
+
+    try {
+        const { status, data } = await buildServerInstance.post('/notify-build-result', buildResult);
+        successfully = status === 200 && data === 'Success';
+    } catch (error) {
+        console.error('При сохранении результатов сборки произошла ошибка');
+    }
+
+    return successfully;
+};
+
 module.exports = {
     createBuildServerInstance,
     registerAgent,
+    saveBuildResult,
 };
