@@ -11,7 +11,9 @@ const { port } = require('./server-conf.json');
 const { validateAuthorization, createDBInstance, getSettingsFromDB, getBuildListFromDB } = require('./db/dbHelper');
 
 if (!validateAuthorization()) {
-    console.warn('Не указан apiToken в конфигурационном файле');
+    console.warn('Не указан apiToken в конфигурационном файле (server-conf.json).\n'
+        + 'Процесс билд-сервера не будет запущен.');
+
     process.exit(0);
 }
 
@@ -83,6 +85,14 @@ const startBuildServer = async () => {
     }
 
     if (!settings) {
+        console.info('Третья попытка получения настроек');
+        settings = await getSettingsFromDB(db);
+    }
+
+    if (!settings) {
+        console.warn('\nНе удалось получить настройки для работы билд-сервера.\n'
+            + 'Процесс билд-сервера будет завершён.');
+
         stopBuildServer();
         return;
     }

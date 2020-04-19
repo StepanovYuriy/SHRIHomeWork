@@ -23,6 +23,17 @@ const startBuildAgent = async () => {
     }
 
     if (!successfullyRegistered) {
+        console.info('Третья попытка регистрации агента');
+        successfullyRegistered = await registerAgent(buildServerInstance);
+    }
+
+    if (!successfullyRegistered) {
+        console.warn('\nНе удалось соединиться с билд-сервером после нескольких попыток.\n'
+            + 'Наиболее вероятные причины такой ситуации: \n'
+            + ' - не запущен билд-сервер\n'
+            + ' - некорректно выставлены значения в файле конфигурации\n'
+            + 'Процесс агента будет завершён.');
+
         stopBuildAgent();
         return;
     }
