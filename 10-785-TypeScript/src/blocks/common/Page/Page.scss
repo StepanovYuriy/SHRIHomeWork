@@ -1,0 +1,19 @@
+.Page {
+  display: flex;
+  flex-direction: column;
+  max-width: 1024px;
+  margin: 0 auto;
+  height: 100%;
+
+  &-Content {
+    display: flex;
+    padding: var(--space-s) var(--space-xxxl);
+    flex-direction: column;
+    flex-grow: 1;
+
+    &_align_center {
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

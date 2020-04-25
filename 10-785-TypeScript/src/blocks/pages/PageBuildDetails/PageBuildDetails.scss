@@ -1,0 +1,13 @@
+.PageBuildDetails {
+  &-Log {
+    margin-top: var(--space-m);
+    margin-bottom: var(--space-m);
+    font-family: 'Hack', monospace;
+    background: var(--color-backgroud-log);
+    border-radius: var(--border-radius-m);
+    padding: var(--space-s) 12px;
+    font-size: var(--text-font-size-code);
+    line-height: 20px;
+    overflow-x: auto;
+  }
+}

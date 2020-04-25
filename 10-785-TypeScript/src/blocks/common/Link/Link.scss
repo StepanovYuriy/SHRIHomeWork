@@ -1,0 +1,14 @@
+.Link {
+  color: var(--color-text-primary);
+  font-size: var(--text-font-size-default);
+  line-height: 16px;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-link-hovered);
+  }
+
+  &_space_right {
+    margin-right: var(--space-m);
+  }
+}

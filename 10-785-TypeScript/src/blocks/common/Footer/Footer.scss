@@ -1,0 +1,21 @@
+.Footer {
+  display: flex;
+  background: var(--blue-grey-50);
+  padding: var(--space-s) var(--space-xxxl);
+
+  &-Navigation {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  &-Copyright {
+    color: var(--color-text-primary);
+    font-size: var(--text-font-size-default);
+    line-height: 16px;
+  }
+
+  &-Link_space_right {
+    margin-right: var(--space-s);
+  }
+}
