@@ -1,27 +1,49 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './Button.scss';
 import cn from 'classnames';
 import { ReactComponent as IconSettings } from '../../../images/settings_12.svg';
 import { ReactComponent as IconRun } from '../../../images/play_12.svg';
 import { ReactComponent as IconRebuild } from '../../../images/rebuild_12.svg';
 
-const SIZES = ['s', 'm'];
-const TYPES = ['default', 'action'];
-const ICONS = ['settings', 'run', 'rebuild'];
+export enum Size {
+    s = 's',
+    m = 'm',
+}
 
-const Button = (props) => {
+export enum Type {
+    default = 'default',
+    action = 'action',
+}
+
+export enum Icon {
+    settings = 'settings',
+    run = 'run',
+    rebuild = 'rebuild',
+}
+
+export interface ButtonProps {
+    size: Size;
+    type: Type;
+    icon?: Icon;
+    text?: string;
+    disabled?: boolean;
+    mixedClassNames?: string;
+
+    onClick(): void;
+}
+
+const Button: React.FC<ButtonProps> = (props) => {
     const {
         size,
         type,
-        icon,
-        text,
+        icon = null,
+        text = '',
+        disabled = false,
+        mixedClassNames = '',
         onClick,
-        disabled,
-        mixedClassNames,
     } = props;
 
-    const renderIcon = () => {
+    const renderIcon = (): React.ReactElement | null => {
         switch (icon) {
             case 'settings':
                 return <IconSettings className="Button-Icon" />;
@@ -37,7 +59,7 @@ const Button = (props) => {
         }
     };
 
-    const renderText = () => (
+    const renderText = (): React.ReactElement => (
         <div className="Button-Text">
             {text}
         </div>
@@ -47,36 +69,20 @@ const Button = (props) => {
         <button type="button"
                 className={cn(
                     'Button', {
-                        [`Button_size_${size}`]: SIZES.includes(size),
-                        [`Button_type_${type}`]: TYPES.includes(type) && !disabled,
-                        Button_disabled: Boolean(disabled),
+                        [`Button_size_${size}`]: Object.values(Size).includes(size),
+                        [`Button_type_${type}`]: Object.values(Type).includes(type) && !disabled,
+                        // eslint-disable-next-line no-useless-computed-key
+                        ['Button_disabled']: disabled,
                     },
                     mixedClassNames,
                 )}
                 onClick={onClick}
-                disabled={disabled ? true : null}
+                disabled={disabled}
         >
             {icon ? renderIcon() : null}
             {text !== '' ? renderText() : null}
         </button>
     );
-};
-
-Button.propTypes = {
-    size: PropTypes.oneOf(SIZES).isRequired,
-    type: PropTypes.oneOf(TYPES).isRequired,
-    icon: PropTypes.oneOf(ICONS),
-    text: PropTypes.string,
-    onClick: PropTypes.func.isRequired,
-    disabled: PropTypes.bool,
-    mixedClassNames: PropTypes.string,
-};
-
-Button.defaultProps = {
-    icon: null,
-    text: '',
-    disabled: false,
-    mixedClassNames: null,
 };
 
 export default Button;

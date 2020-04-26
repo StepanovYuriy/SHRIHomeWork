@@ -2,24 +2,24 @@ import React from 'react';
 import './PageStartScreen.scss';
 import { useHistory } from 'react-router-dom';
 import Page from '../../common/Page/Page';
-import Header from '../../common/Header/Header';
-import Button from '../../common/Button/Button';
+import Header, { TitleType } from '../../common/Header/Header';
+import Button, { Icon, Size, Type } from '../../common/Button/Button';
 import Footer from '../../common/Footer/Footer';
 import { ReactComponent as BuildSettingsImage } from '../../../images/build_settings_124.svg';
 
-const PageStartScreen = () => {
+const PageStartScreen: React.FC = () => {
     const history = useHistory();
 
-    const onClickButtonSettings = () => {
+    const onClickButtonSettings = (): void => {
         history.push('/settings');
     };
 
     return (
         <Page>
-            <Header title="School CI server" titleType="settings">
-                <Button size="s"
-                        type="default"
-                        icon="settings"
+            <Header title="School CI server" titleType={TitleType.settings}>
+                <Button size={Size.s}
+                        type={Type.default}
+                        icon={Icon.settings}
                         text="Settings"
                         onClick={onClickButtonSettings}
                 />
@@ -29,8 +29,8 @@ const PageStartScreen = () => {
                 <div className="PageStartScreen-Text">
                     Configure repository connection and synchronization settings
                 </div>
-                <Button size="m"
-                        type="action"
+                <Button size={Size.m}
+                        type={Type.action}
                         text="Open settings"
                         onClick={onClickButtonSettings}
                         mixedClassNames="PageStartScreen-Button_space_bottom"

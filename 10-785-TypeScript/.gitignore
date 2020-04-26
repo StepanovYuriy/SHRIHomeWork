@@ -2,3 +2,4 @@
 /build
 /server/git/storage
 /.env
+/src/react-app-env.d.ts

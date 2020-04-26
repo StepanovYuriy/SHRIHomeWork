@@ -1,10 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 
-const Portal = ({ id, children, className }) => {
-    const element = useRef(document.getElementById(id) || document.createElement('div'));
+export interface PortalProps {
+    id?: string;
+    children: React.ReactNode;
+    className: string;
+}
+
+const Portal: React.FC<PortalProps> = (props) => {
+    const {
+        id = '',
+        children,
+        className = '',
+    } = props;
+
+    const element: React.MutableRefObject<HTMLElement> = useRef(document.getElementById(id) || document.createElement('div'));
     const [dynamic] = useState(!element.current.parentElement);
 
     useEffect(() => {
@@ -15,7 +26,7 @@ const Portal = ({ id, children, className }) => {
             document.body.appendChild(element.current);
         }
 
-        return () => {
+        return (): void => {
             if (dynamic && element.current.parentElement) {
                 element.current.parentElement.removeChild(element.current);
             }
@@ -23,18 +34,6 @@ const Portal = ({ id, children, className }) => {
     }, [id, dynamic, className]);
 
     return createPortal(children, element.current);
-};
-
-Portal.propTypes = {
-    id: PropTypes.string,
-    children: PropTypes.node,
-    className: PropTypes.string,
-};
-
-Portal.defaultProps = {
-    id: null,
-    children: null,
-    className: null,
 };
 
 export default memo(Portal);

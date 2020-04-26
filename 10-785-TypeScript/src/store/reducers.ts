@@ -1,7 +1,7 @@
-import initialState from './initialState';
-import { SET_BUILD_LIST, SET_BUILD_LOGS, SET_COUNT_LOADED_BUILDS, SET_FETCHING, SET_SETTINGS } from './actionTypes';
+import initialState, { RootState } from './initialState';
+import { Action, SET_BUILD_LIST, SET_BUILD_LOGS, SET_COUNT_LOADED_BUILDS, SET_FETCHING, SET_SETTINGS } from './types';
 
-const rootReducer = (state = initialState, action) => {
+const rootReducer = (state: RootState = initialState, action: Action): RootState => {
     switch (action.type) {
         case SET_FETCHING: {
             const { fetching } = action;

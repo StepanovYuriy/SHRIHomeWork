@@ -3,14 +3,15 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import PageStartScreen from '../PageStartScreen/PageStartScreen';
 import PageBuildHistory from '../PageBuildHistory/PageBuildHistory';
 import { getSettingsRequest } from '../../../store/actions';
+import { RootState } from '../../../store/initialState';
 
-const PageMain = () => {
+const PageMain: React.FC = () => {
     const dispatch = useDispatch();
-    const settings = useSelector((state) => state.settings, shallowEqual);
+    const { settings } = useSelector((state: RootState) => state, shallowEqual);
 
     useEffect(
         () => {
-            if (!settings) {
+            if (!settings.id) {
                 dispatch(getSettingsRequest());
             }
         },
@@ -19,7 +20,7 @@ const PageMain = () => {
     // TODO По хорошему надо сделать более качественную проверку настроек.
     // И скорее всего вообще сделать редирект по другому. Без лишнего файла
 
-    return (settings ? <PageBuildHistory /> : <PageStartScreen />);
+    return (settings.id ? <PageBuildHistory /> : <PageStartScreen />);
 };
 
 export default PageMain;

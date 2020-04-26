@@ -2,7 +2,7 @@ import React from 'react';
 import './Footer.scss';
 import Link from '../Link/Link';
 
-const Footer = () => (
+const Footer: React.FC = () => (
     <div className="Footer">
         <div className="Footer-Navigation">
             <Link name="Support"

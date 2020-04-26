@@ -3,29 +3,25 @@ import './PageSettings.scss';
 import { useHistory } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Page from '../../common/Page/Page';
-import Header from '../../common/Header/Header';
+import Header, { TitleType } from '../../common/Header/Header';
 import Footer from '../../common/Footer/Footer';
-import Button from '../../common/Button/Button';
+import Button, { Size, Type } from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
 import { saveSettingsRequest } from '../../../store/actions';
+import { MainSettings, RootState } from '../../../store/initialState';
 
-const PageSettings = () => {
+const PageSettings: React.FC = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { settings, fetching } = useSelector((state) => state, shallowEqual);
+    const { settings, fetching } = useSelector((state: RootState) => state, shallowEqual);
 
-    const initRepoName = () => (settings && settings.repoName) || '';
-    const initBuildCommand = () => (settings && settings.buildCommand) || 'npm ci && npm run build';
-    const initMainBranch = () => (settings && settings.mainBranch) || 'master';
-    const initPeriod = () => (settings && settings.period) || 0;
+    const [repoName, setRepoName] = useState(settings.repoName);
+    const [buildCommand, setBuildCommand] = useState(settings.buildCommand);
+    const [mainBranch, setMainBranch] = useState(settings.mainBranch);
+    const [period, setPeriod] = useState(settings.period);
 
-    const [repoName, setRepoName] = useState(initRepoName());
-    const [buildCommand, setBuildCommand] = useState(initBuildCommand());
-    const [mainBranch, setMainBranch] = useState(initMainBranch());
-    const [period, setPeriod] = useState(initPeriod());
-
-    const onClickButtonSave = () => {
-        const newSettings = {
+    const onClickButtonSave = (): void => {
+        const newSettings: MainSettings = {
             repoName,
             buildCommand,
             mainBranch,
@@ -35,17 +31,23 @@ const PageSettings = () => {
         dispatch(saveSettingsRequest(newSettings));
     };
 
-    const onClickButtonCancel = () => {
+    const onClickButtonCancel = (): void => {
         history.push('/');
     };
 
-    const onChangeRepoName = (event) => setRepoName(event.target.value);
+    const onChangeRepoName = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setRepoName(event.target.value);
+    };
 
-    const onChangeBuildCommand = (event) => setBuildCommand(event.target.value);
+    const onChangeBuildCommand = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setBuildCommand(event.target.value);
+    };
 
-    const onChangeBranch = (event) => setMainBranch(event.target.value);
+    const onChangeBranch = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setMainBranch(event.target.value);
+    };
 
-    const onChangeSynchronizeTime = (event) => {
+    const onChangeSynchronizeTime = (event: React.ChangeEvent<HTMLInputElement>): void => {
         if (+event.target.value >= 0) {
             setPeriod(+event.target.value);
         }
@@ -53,7 +55,7 @@ const PageSettings = () => {
 
     return (
         <Page>
-            <Header title="School CI server" titleType="settings" />
+            <Header title="School CI server" titleType={TitleType.settings} />
             <div className="Page-Content PageSettings-Form">
                 <div className="PageSettings-Title">
                     Settings
@@ -90,15 +92,15 @@ const PageSettings = () => {
                     <div className="PageSettings-Label">minutes</div>
                 </div>
                 <div className="PageSettings-Buttons">
-                    <Button size="m"
-                            type="action"
+                    <Button size={Size.m}
+                            type={Type.action}
                             text="Save"
                             onClick={onClickButtonSave}
                             disabled={fetching || repoName === '' || buildCommand === ''}
                             mixedClassNames="PageSettings-Button_space_right"
                     />
-                    <Button size="m"
-                            type="default"
+                    <Button size={Size.m}
+                            type={Type.default}
                             text="Cancel"
                             onClick={onClickButtonCancel}
                             disabled={fetching}

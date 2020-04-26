@@ -6,7 +6,7 @@ import PageSettings from './blocks/pages/PageSettings/PageSettings';
 import PageBuildHistory from './blocks/pages/PageBuildHistory/PageBuildHistory';
 import PageBuildDetails from './blocks/pages/PageBuildDetails/PageBuildDetails';
 
-const App = () => (
+const App: React.FC = () => (
     <BrowserRouter>
         <Switch>
             <Route path="/build-history" component={PageBuildHistory} />

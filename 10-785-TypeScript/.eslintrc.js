@@ -6,7 +6,10 @@ module.exports = {
     extends: [
         'airbnb',
         'plugin:react/recommended',
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended'
     ],
+    parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaFeatures: {
             jsx: true,
@@ -17,7 +20,15 @@ module.exports = {
     plugins: [
         'react',
         'react-hooks',
+        '@typescript-eslint',
     ],
+    settings: {
+        'import/resolver': {
+            node: {
+                extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
+            }
+        },
+    },
     rules: {
         /**
          * Настройки отступов (4 пробела)
@@ -102,5 +113,28 @@ module.exports = {
          * https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md
          */
         'jsx-a11y/label-has-associated-control': 'off',
+
+        /**
+         * JSX разметка может содержаться только в файлах *.jsx и *.tsx
+         * https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md
+         */
+        'react/jsx-filename-extension': ['error', { 'extensions': ['.jsx', '.tsx'] }],
+
+        'import/extensions': ['error', 'ignorePackages', {
+            'js': 'never',
+            'jsx': 'never',
+            'ts': 'never',
+            'tsx': 'never',
+        }],
+
+        'dot-notation': 'off',
     },
+    overrides: [
+        {
+            'files': ['**/*.tsx'],
+            'rules': {
+                'react/prop-types': 'off'
+            }
+        }
+    ],
 };

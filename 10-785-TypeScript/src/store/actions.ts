@@ -1,27 +1,41 @@
 import axios from 'axios';
-import { SET_BUILD_LIST, SET_BUILD_LOGS, SET_COUNT_LOADED_BUILDS, SET_FETCHING, SET_SETTINGS } from './actionTypes';
+import { Build, MainSettings } from './initialState';
+import {
+    ActionCreator,
+    SET_BUILD_LIST,
+    SET_BUILD_LOGS,
+    SET_COUNT_LOADED_BUILDS,
+    SET_FETCHING,
+    SET_SETTINGS,
+    SetBuildListAction,
+    SetBuildLogsAction,
+    SetCountLoadedBuildsAction,
+    SetFetchingAction,
+    SetSettingsAction,
+} from './types';
 
-export const setFetching = (fetching) => (
+
+export const setFetching = (fetching: boolean): SetFetchingAction => (
     { type: SET_FETCHING, fetching }
 );
 
-export const setBuildList = (buildList, buildsNotFound) => (
+export const setBuildList = (buildList: Build[], buildsNotFound: boolean): SetBuildListAction => (
     { type: SET_BUILD_LIST, buildList, buildsNotFound }
 );
 
-export const setCountLoadedBuilds = (countLoadedBuilds) => (
+export const setCountLoadedBuilds = (countLoadedBuilds: number): SetCountLoadedBuildsAction => (
     { type: SET_COUNT_LOADED_BUILDS, countLoadedBuilds }
 );
 
-export const setBuildLogs = (buildLogs) => (
+export const setBuildLogs = (buildLogs: Record<string, any>): SetBuildLogsAction => (
     { type: SET_BUILD_LOGS, buildLogs }
 );
 
-export const setSettings = (settings) => (
+export const setSettings = (settings: MainSettings): SetSettingsAction => (
     { type: SET_SETTINGS, settings }
 );
 
-export const getBuildListRequest = () => (dispatch, getState) => {
+export const getBuildListRequest = () => (dispatch: any, getState: any): ActionCreator => {
     const offset = getState().countLoadedBuilds;
     const limit = 10;
 
@@ -42,7 +56,7 @@ export const getBuildListRequest = () => (dispatch, getState) => {
         .finally(() => dispatch(setFetching(false)));
 };
 
-export const getBuildRequest = (buildId) => (dispatch, getState) => {
+export const getBuildRequest = (buildId: string) => (dispatch: any, getState: any): ActionCreator => {
     dispatch(setFetching(true));
 
     axios.get(`/api/builds/${buildId}`)
@@ -51,13 +65,13 @@ export const getBuildRequest = (buildId) => (dispatch, getState) => {
             const buildList = [...getState().buildList];
             buildList.push(build);
 
-            dispatch(setBuildList(buildList));
+            dispatch(setBuildList(buildList, false));
         })
         .catch((error) => console.error(error))
         .finally(() => dispatch(setFetching(false)));
 };
 
-export const getBuildLogRequest = (buildId) => (dispatch, getState) => {
+export const getBuildLogRequest = (buildId: string) => (dispatch: any, getState: any): ActionCreator => {
     dispatch(setFetching(true));
 
     axios.get(`/api/builds/${buildId}/logs`)
@@ -71,7 +85,7 @@ export const getBuildLogRequest = (buildId) => (dispatch, getState) => {
         .finally(() => dispatch(setFetching(false)));
 };
 
-export const runBuildRequest = async (commitHash) => {
+export const runBuildRequest = async (commitHash: string): Promise<any> => {
     let newBuildId = null;
 
     await axios.post('/api/builds', { commitHash })
@@ -84,7 +98,7 @@ export const runBuildRequest = async (commitHash) => {
     return newBuildId;
 };
 
-export const getSettingsRequest = () => (dispatch) => {
+export const getSettingsRequest = () => (dispatch: any): ActionCreator => {
     dispatch(setFetching(true));
 
     axios.get('/api/settings')
@@ -98,7 +112,7 @@ export const getSettingsRequest = () => (dispatch) => {
         .finally(() => dispatch(setFetching(false)));
 };
 
-export const saveSettingsRequest = (newSettings) => (dispatch) => {
+export const saveSettingsRequest = (newSettings: MainSettings) => (dispatch: any): ActionCreator => {
     dispatch(setFetching(true));
 
     axios.post('/api/settings', newSettings)

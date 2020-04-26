@@ -3,18 +3,19 @@ import './PageBuildHistory.scss';
 import { useHistory } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Page from '../../common/Page/Page';
-import Header from '../../common/Header/Header';
-import Button from '../../common/Button/Button';
+import Header, { TitleType } from '../../common/Header/Header';
+import Button, { Icon, Size, Type } from '../../common/Button/Button';
 import Footer from '../../common/Footer/Footer';
 import Card from '../../common/Card/Card';
 import { getBuildListRequest } from '../../../store/actions';
 import PopupRunNewBuild from './PopupRunNewBuild/PopupRunNewBuild';
+import { Build, RootState } from '../../../store/initialState';
 
-const PageBuildHistory = () => {
+const PageBuildHistory: React.FC = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const { settings, fetching, buildList, buildsNotFound } = useSelector((state) => state, shallowEqual);
+    const { settings, fetching, buildList, buildsNotFound } = useSelector((state: RootState) => state, shallowEqual);
     const [popupIsOpened, setPopupIsOpened] = useState(false);
 
     useEffect(
@@ -26,33 +27,33 @@ const PageBuildHistory = () => {
         [dispatch, buildList, buildsNotFound],
     );
 
-    const onClickButtonSettings = () => {
+    const onClickButtonSettings = (): void => {
         history.push('/settings');
     };
 
-    const onClickCard = (id) => {
+    const onClickCard = (id: string): void => {
         history.push(`/build/${id}`);
     };
 
-    const onClickButtonRunBuild = () => {
+    const onClickButtonRunBuild = (): void => {
         setPopupIsOpened(true);
     };
 
-    const onClosePopup = () => {
+    const onClosePopup = (): void => {
         setPopupIsOpened(false);
     };
 
-    const onClickButtonShowMore = () => {
+    const onClickButtonShowMore = (): void => {
         dispatch(getBuildListRequest());
     };
 
-    const renderBuildList = () => {
+    const renderBuildList = (): React.ReactElement | string => {
         if (buildsNotFound) return 'Записи отсутствуют';
         if (fetching && !buildList.length) return 'Загрузка';
 
         return (
             <>
-                {buildList.map((build) => (
+                {buildList.map((build: Build) => (
                     <Card key={build.id}
                           number={build.buildNumber}
                           status={build.status}
@@ -62,13 +63,13 @@ const PageBuildHistory = () => {
                           author={build.authorName}
                           date={build.start}
                           duration={build.duration}
-                          onClick={() => onClickCard(build.id)}
+                          onClick={(): void => onClickCard(build.id)}
                           mixedClassNames="PageBuildHistory-ListItem"
                     />
                 ))}
                 <div className="PageBuildHistory-ButtonMore">
-                    <Button size="s"
-                            type="default"
+                    <Button size={Size.s}
+                            type={Type.default}
                             text="Show more"
                             disabled={fetching}
                             onClick={onClickButtonShowMore}
@@ -80,18 +81,18 @@ const PageBuildHistory = () => {
 
     return (
         <Page>
-            <Header title={settings.repoName} titleType="build">
+            <Header title={settings.repoName} titleType={TitleType.build}>
                 {popupIsOpened ? <PopupRunNewBuild closePopup={onClosePopup} /> : null}
-                <Button size="s"
-                        type="default"
-                        icon="run"
+                <Button size={Size.s}
+                        type={Type.default}
+                        icon={Icon.run}
                         text="Run build"
                         onClick={onClickButtonRunBuild}
                         mixedClassNames="PageBuildHistory-Button_space_right"
                 />
-                <Button size="s"
-                        type="default"
-                        icon="settings"
+                <Button size={Size.s}
+                        type={Type.default}
+                        icon={Icon.settings}
                         onClick={onClickButtonSettings}
                 />
             </Header>
