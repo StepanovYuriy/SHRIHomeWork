@@ -18,3 +18,22 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root'),
 );
+
+const registerServiceWorker = (): void => {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker
+                .register('service-worker.js')
+                .then((registration) => {
+                    console.info('ServiceWorker registration successful with scope: ', registration.scope);
+                })
+                .catch((error: Error) => {
+                    console.warn('ServiceWorker registration failed: ', error);
+                });
+        });
+    } else {
+        console.warn('Service worker is not supported');
+    }
+};
+
+registerServiceWorker();
