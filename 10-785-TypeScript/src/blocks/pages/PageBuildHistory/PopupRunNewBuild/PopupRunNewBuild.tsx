@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './PopupRunNewBuild.scss';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Popup from '../../../common/Popup/Popup';
 import Input from '../../../common/Input/Input';
 import Button, { Size, Type } from '../../../common/Button/Button';
@@ -14,6 +15,8 @@ const PopupRunNewBuild: React.FC<PopupRunNewBuildProps> = (props) => {
     const { closePopup } = props;
 
     const history = useHistory();
+    const { t } = useTranslation();
+
     const [fetching, setFetching] = useState(false);
     const [commitHash, setCommitHash] = useState('');
 
@@ -37,11 +40,11 @@ const PopupRunNewBuild: React.FC<PopupRunNewBuildProps> = (props) => {
     return (
         <Popup>
             <div className="PopupRunNewBuild-Header">
-                New build
+                {t('newBuild')}
             </div>
             <div className="PopupRunNewBuild-Content">
                 <div className="PopupRunNewBuild-Description">
-                    Enter the commit hash which you want to build.
+                    {t('enterCommit')}
                 </div>
                 <Input value={commitHash}
                        onChange={onChangeCommitHash}
@@ -51,14 +54,14 @@ const PopupRunNewBuild: React.FC<PopupRunNewBuildProps> = (props) => {
             <div className="PopupRunNewBuild-Footer">
                 <Button size={Size.m}
                         type={Type.action}
-                        text="Run build"
+                        text={t('runBuild')}
                         onClick={onClickButtonRunBuild}
                         disabled={fetching || commitHash === '' || commitHash.length > 40}
                         mixedClassNames="PopupRunNewBuild-Button_space_right"
                 />
                 <Button size={Size.m}
                         type={Type.default}
-                        text="Cancel"
+                        text={t('cancel')}
                         onClick={onClickButtonCancel}
                         disabled={fetching}
                 />

@@ -2,8 +2,9 @@ import React from 'react';
 import './Card.scss';
 import cn from 'classnames';
 import { format } from 'date-fns';
-import { ru } from 'date-fns/locale';
+import { enGB, ru } from 'date-fns/locale';
 import { zonedTimeToUtc } from 'date-fns-tz';
+import { useTranslation } from 'react-i18next';
 import { ReactComponent as IconDone } from '../../../images/done_22.svg';
 import { ReactComponent as IconWait } from '../../../images/wait_22.svg';
 import { ReactComponent as IconFail } from '../../../images/fail_22.svg';
@@ -40,11 +41,16 @@ const Card: React.FC<CardProps> = (props) => {
         mixedClassNames = '',
         onClick = (): void => undefined,
     } = props;
+    const { t, i18n } = useTranslation();
+
+    const getCurrentLng = (): string => i18n.language || window.localStorage.i18nextLng || '';
 
     const getDateStartText = (): string => {
         if (!date) return '-';
 
-        return format(zonedTimeToUtc(date, 'UTC'), 'd MMM HH:mm', { locale: ru });
+        const locale = getCurrentLng() === 'en' ? enGB : ru;
+
+        return format(zonedTimeToUtc(date, 'UTC'), 'd MMM HH:mm', { locale });
     };
 
     const getDurationText = (): string => {
@@ -55,14 +61,14 @@ const Card: React.FC<CardProps> = (props) => {
         const seconds: number = Math.floor(duration % 60);
 
         if (!hours && !minutes) {
-            return `${seconds} сек`;
+            return `${seconds} ${t('s')}`;
         }
 
         if (!hours) {
-            return `${minutes} мин ${seconds} сек`;
+            return `${minutes} ${t('m')} ${seconds} ${t('s')}`;
         }
 
-        return `${hours} ч ${minutes} мин ${seconds} сек`;
+        return `${hours} ${t('h')} ${minutes} ${t('m')} ${seconds} ${t('s')}`;
     };
 
     const renderStatus = (): React.ReactElement | null => {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './PageBuildHistory.scss';
 import { useHistory } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import Page from '../../common/Page/Page';
 import Header, { TitleType } from '../../common/Header/Header';
 import Button, { Icon, Size, Type } from '../../common/Button/Button';
@@ -14,6 +15,7 @@ import { Build, RootState } from '../../../store/initialState';
 const PageBuildHistory: React.FC = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { t } = useTranslation();
 
     const { settings, fetching, buildList, buildsNotFound } = useSelector((state: RootState) => state, shallowEqual);
     const [popupIsOpened, setPopupIsOpened] = useState(false);
@@ -49,7 +51,7 @@ const PageBuildHistory: React.FC = () => {
 
     const renderBuildList = (): React.ReactElement | string => {
         if (buildsNotFound) return 'Записи отсутствуют';
-        if (fetching && !buildList.length) return 'Загрузка';
+        if (fetching && !buildList.length) return t('loading');
 
         return (
             <>
@@ -70,7 +72,7 @@ const PageBuildHistory: React.FC = () => {
                 <div className="PageBuildHistory-ButtonMore">
                     <Button size={Size.s}
                             type={Type.default}
-                            text="Show more"
+                            text={t('showMore')}
                             disabled={fetching}
                             onClick={onClickButtonShowMore}
                     />
@@ -86,7 +88,7 @@ const PageBuildHistory: React.FC = () => {
                 <Button size={Size.s}
                         type={Type.default}
                         icon={Icon.run}
-                        text="Run build"
+                        text={t('runBuild')}
                         onClick={onClickButtonRunBuild}
                         mixedClassNames="PageBuildHistory-Button_space_right"
                 />

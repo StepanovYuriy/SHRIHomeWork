@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import './PageBuildDetails.scss';
 import { useHistory, useParams } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import Page from '../../common/Page/Page';
 import Header, { TitleType } from '../../common/Header/Header';
 import Button, { Icon, Size, Type } from '../../common/Button/Button';
@@ -14,6 +15,7 @@ const PageBuildDetails: React.FC = () => {
     const { buildId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
+    const { t } = useTranslation();
 
     const { settings, fetching, buildList, buildLogs } = useSelector((state: RootState) => state, shallowEqual);
 
@@ -56,7 +58,7 @@ const PageBuildDetails: React.FC = () => {
     };
 
     const renderCard = (): React.ReactElement | string => {
-        if (!build) return 'Нет данных';
+        if (!build) return t('noData');
         const { buildNumber, status, commitMessage, commitHash, branchName, authorName } = build;
 
         return (
@@ -77,7 +79,7 @@ const PageBuildDetails: React.FC = () => {
 
         return (
             <pre className="PageBuildDetails-Log">
-                {buildLog || 'Загрузка'}
+                {buildLog || t('loading')}
             </pre>
         );
     };
@@ -88,7 +90,7 @@ const PageBuildDetails: React.FC = () => {
                 <Button size={Size.s}
                         type={Type.action}
                         icon={Icon.rebuild}
-                        text="Rebuild"
+                        text={t('rebuild')}
                         onClick={onClickButtonRebuild}
                         disabled={fetching || !build}
                         mixedClassNames="PageBuildHistory-Button_space_right"

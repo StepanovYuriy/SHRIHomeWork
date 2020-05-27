@@ -4,6 +4,7 @@ import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import './i18n';
 import App from './App';
 import rootReducer from './store/reducers';
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './PageSettings.scss';
 import { useHistory } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import Page from '../../common/Page/Page';
 import Header, { TitleType } from '../../common/Header/Header';
 import Footer from '../../common/Footer/Footer';
@@ -13,6 +14,8 @@ import { MainSettings, RootState } from '../../../store/initialState';
 const PageSettings: React.FC = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { t } = useTranslation();
+
     const { settings, fetching } = useSelector((state: RootState) => state, shallowEqual);
 
     const [repoName, setRepoName] = useState(settings.repoName);
@@ -55,53 +58,57 @@ const PageSettings: React.FC = () => {
 
     return (
         <Page>
-            <Header title="School CI server" titleType={TitleType.settings} />
+            <Header title={t('schoolServer')} titleType={TitleType.settings} />
             <div className="Page-Content PageSettings-Form">
                 <div className="PageSettings-Title">
-                    Settings
+                    {t('settings')}
                 </div>
                 <div className="PageSettings-Description">
-                    Configure repository connection and synchronization settings.
+                    {t('configureSettings')}
                 </div>
                 <Input value={repoName}
                        onChange={onChangeRepoName}
-                       label="GitHub repository"
+                       label={t('gitHubRepo')}
                        placeholder="user-name/repo-name"
                        required
                 />
                 <Input value={buildCommand}
                        onChange={onChangeBuildCommand}
-                       label="Build command"
+                       label={t('buildCommand')}
                        placeholder="npm ci && npm run build"
                        required
                        mixedClassNames="PageSettings-Field_space_top"
                 />
                 <Input value={mainBranch}
                        onChange={onChangeBranch}
-                       label="Main branch"
+                       label={t('mainBranch')}
                        placeholder="master"
                        mixedClassNames="PageSettings-Field_space_top"
                 />
                 <div className="PageSettings-Field PageSettings-Field_space_top">
-                    <div className="PageSettings-Label">Synchronize every</div>
+                    <div className="PageSettings-Label">
+                        {t('syncEvery').split('  ')[0]}
+                    </div>
                     <Input value={period}
                            onChange={onChangeSynchronizeTime}
                            textRight
                            mixedClassNames="PageSettings-NumberInput"
                     />
-                    <div className="PageSettings-Label">minutes</div>
+                    <div className="PageSettings-Label">
+                        {t('syncEvery').split('  ')[1]}
+                    </div>
                 </div>
                 <div className="PageSettings-Buttons">
                     <Button size={Size.m}
                             type={Type.action}
-                            text="Save"
+                            text={t('save')}
                             onClick={onClickButtonSave}
                             disabled={fetching || repoName === '' || buildCommand === ''}
                             mixedClassNames="PageSettings-Button_space_right"
                     />
                     <Button size={Size.m}
                             type={Type.default}
-                            text="Cancel"
+                            text={t('cancel')}
                             onClick={onClickButtonCancel}
                             disabled={fetching}
                     />

@@ -1,6 +1,7 @@
 import React from 'react';
 import './PageStartScreen.scss';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Page from '../../common/Page/Page';
 import Header, { TitleType } from '../../common/Header/Header';
 import Button, { Icon, Size, Type } from '../../common/Button/Button';
@@ -9,6 +10,7 @@ import { ReactComponent as BuildSettingsImage } from '../../../images/build_sett
 
 const PageStartScreen: React.FC = () => {
     const history = useHistory();
+    const { t } = useTranslation();
 
     const onClickButtonSettings = (): void => {
         history.push('/settings');
@@ -16,22 +18,22 @@ const PageStartScreen: React.FC = () => {
 
     return (
         <Page>
-            <Header title="School CI server" titleType={TitleType.settings}>
+            <Header title={t('schoolServer')} titleType={TitleType.settings}>
                 <Button size={Size.s}
                         type={Type.default}
                         icon={Icon.settings}
-                        text="Settings"
+                        text={t('settings')}
                         onClick={onClickButtonSettings}
                 />
             </Header>
             <div className="Page-Content Page-Content_align_center">
                 <BuildSettingsImage className="PageStartScreen-Image" />
                 <div className="PageStartScreen-Text">
-                    Configure repository connection and synchronization settings
+                    {t('configureSettings')}
                 </div>
                 <Button size={Size.m}
                         type={Type.action}
-                        text="Open settings"
+                        text={t('openSettings')}
                         onClick={onClickButtonSettings}
                         mixedClassNames="PageStartScreen-Button_space_bottom"
                 />

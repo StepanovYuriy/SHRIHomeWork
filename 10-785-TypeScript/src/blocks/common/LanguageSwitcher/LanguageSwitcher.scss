@@ -1,0 +1,13 @@
+.LanguageSwitcher {
+  color: var(--color-text-primary);
+  font-size: var(--text-font-size-default);
+  line-height: 16px;
+  text-decoration: none;
+  background-color: inherit;
+  border: none;
+
+  &:hover {
+    color: var(--color-link-hovered);
+    cursor: pointer;
+  }
+}
