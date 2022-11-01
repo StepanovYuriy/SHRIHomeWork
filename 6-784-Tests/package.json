@@ -15,7 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.2.0",
-    "hermione": "^3.1.0",
+    "hermione": "^5.3.1",
     "html-reporter": "^5.15.2",
     "jest": "^25.3.0",
     "selenium-standalone": "^6.17.0"
